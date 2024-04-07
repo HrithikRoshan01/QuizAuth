@@ -3,7 +3,7 @@ import data from '../../Database/Data';
 import { useSelector } from 'react-redux';
 
 export default function ResultTable() {
-    const result = useSelector(state => state.result.result);
+    const result = useSelector(state => state.result);
     const questions = data;
 
     return (

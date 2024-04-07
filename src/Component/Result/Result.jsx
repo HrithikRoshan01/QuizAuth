@@ -3,8 +3,7 @@ import './Result.css'
 import { Link } from 'react-router-dom'
 import ResultTable from './ResultTable'
 import {useDispatch ,useSelector} from 'react-redux'
-import { resetAllAction } from '../../Redux/question_reducer'
-import { resetResultAction } from '../../Redux/result_reducer'
+import { resetResultAction } from '../../Redux/Result'
 import { answer } from '../../Database/Data'
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -15,22 +14,20 @@ export default function Result() {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
   const dispatch = useDispatch()
-  const  res = useSelector(state => state.result.result)
-  for(let t = 0 ; t < 15;t++){
-    if ((res[t] != undefined) && (answer[t] === res[t] )){
-      console.log(answer[t],res[t])
-      score = score+10
+  const  res = useSelector(state => state.result)
+  for (let t = 0; t < 15; t++) {
+    if (res && answer && res[t] !== undefined && answer[t] !== undefined && answer[t] === res[t]) {
+        console.log(answer[t], res[t]);
+        score = score + 10;
     }
-    // console.log("hello")
-  }
+}
 useEffect(()=>{
   // console.log(res)
   // console.log(answer[0])
 })
   
   const restart = ()=>{
-   dispatch(resetAllAction())
-   dispatch(resetResultAction())
+        dispatch(resetResultAction())
   }
 
 
@@ -40,7 +37,7 @@ useEffect(()=>{
 
       <div className="result flex-center">
             <div className='flex'>
-              <span><strong>{user.given_name}</strong></span>
+              <span><strong>{user.given_name?user.given_name:"Hello"}</strong></span>
             </div>
             <div className='flex'>
               <span>Total Quiz Question    </span>

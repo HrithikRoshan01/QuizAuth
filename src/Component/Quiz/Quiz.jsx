@@ -2,51 +2,54 @@ import React, { useEffect,useState } from 'react'
 import Question from '../Question/Question'
 import './Quiz.css'
 import { useSelector,useDispatch } from 'react-redux'
-import { MoveNextQuestion, PrevQuestion } from '../../Hooks/FetchQuestion'
-import { PushAnswer } from '../../Hooks/setResult'
 import {Navigate} from 'react-router-dom'
 import Timer from '../Timer'
+import Data from '../../Database/Data'
+import  { pushResultAction,updateResultAction } from '../../Redux/Result'
+
+
 
 export default function Quiz() {
 
-  const [checked,setchecked] = useState(0)
+  // const [checked,setchecked] = useState(undefined)
+  const [count,setCount] = useState(0)
 
-  const result = useSelector(state=>state.result.result)
-  const { queue, trace } = useSelector(state => state.questions);
+  const result = useSelector(state=>state.result)
   const dispatch = useDispatch()
   
-  function oncheck(i){
-    setchecked(i)
+
+  if(result.length === 1){
+    for(let i = 0 ; i < Data.length-1 ; i++ ){
+      dispatch(pushResultAction(undefined))
   }
-  // button
+}
+
+useEffect(()=>{
+  console.log(result)
+})
+  
   const Previous = ()=>{
-      if(trace >0){
-        dispatch(PrevQuestion());
+      if(count > 0){
+        setCount(count-1);
 
       }
   }
   const Next = ()=>{
-    if(trace < queue.length){
-      dispatch(MoveNextQuestion());
-
-      if(result.length <= trace){
-          dispatch(PushAnswer(checked))
-      }
-  }
-
-  setchecked(undefined)
+    if (count < Data.length-1){
+        setCount(count+1)
+    }
+    
 
 }
-if(result.length && result.length >= queue.length){
+if( count >= Data.length-1){
   return <Navigate to={'/result'} replace = {true}></Navigate>
 }
 
   return (
     <div>
       <Timer/>
-      <Question oncheck = {oncheck}/>
+      <Question count ={count}/>
       <div className='btn button'>
-        <button onClick={Previous}>Prev</button>
         <button onClick={Next}>Next</button>
       </div>
     </div>

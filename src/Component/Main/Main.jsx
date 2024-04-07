@@ -14,6 +14,7 @@ export default function Main() {
                 <li>You will be asked 15 questions one after another</li>
                 <li>10 points are awarded for each correct answer</li>
                 <li>The result will be declared at the end of the quiz</li>
+                <li>You cannot Go to Previous Question</li>
             </ol>
             {isAuthenticated ? (
                 <div className='start'>
