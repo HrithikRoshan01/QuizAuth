@@ -1,0 +1,20 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container h1{
+    padding: 90px;
+}
+.container li{
+    list-style: square;
+    padding: 30px;
+    
+}
+.start{
+    padding: 10px;
+}
+.start button{
+    margin:60px
+}

@@ -1,0 +1,39 @@
+.container{
+  display: flex;
+  flex-direction: column;
+}
+
+.question{
+    margin:100px;
+}
+.question ul{
+    margin: 20px 0px;
+   
+}
+.question li{
+    display: flex;
+}
+.question li label{
+    margin-left: 20px;
+}
+
+input[type=radio]:checked ~ .check {
+  border: 5px solid white
+}
+
+input[type=radio]:checked ~ .check::before{
+  background: white
+}
+
+input[type=radio]:checked ~ .text-primary{
+  color: white
+} 
+
+/* To get selected option we are using this checked class */
+.checked {
+  border: 5px solid var(--primary-color) !important;
+}
+
+.checked::before{
+  background: white
+}
